@@ -1,6 +1,7 @@
 import {useState} from "react";
 
 import {Posts, UserInfo, Users} from "./components";
+import styles from './App.module.css'
 
 
 function App() {
@@ -9,8 +10,8 @@ function App() {
 
     return (
         <div>
-            <div>
-                <Users setUser={setUser}/>
+            <div className={styles.usersAndInfo}>
+                <Users setUser={setUser} setUserIdForPosts={setUserIdForPosts}/>
                 {user && <UserInfo user={user} setUserIdForPosts={setUserIdForPosts}/>}
             </div>
             {userIdForPosts && <Posts userId={userIdForPosts}/>}

@@ -1,6 +1,7 @@
 import React from 'react';
 
 const UserInfo = ({user, setUserIdForPosts}) => {
+
     return (
         <div>
             <div>{user.id}</div>
