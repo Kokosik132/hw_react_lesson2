@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from 'react';
+
 import {usersService} from "../../service";
 import {User} from "../User/User";
 
 const Users = ({setUser, setUserIdForPosts}) => {
     const [users, setUsers] = useState(null);
+
     useEffect(() => {
         usersService.getAll().then(({data}) => setUsers(data))
     }, [])
