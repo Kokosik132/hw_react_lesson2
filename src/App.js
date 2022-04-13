@@ -1,12 +1,11 @@
-import logo from './logo.svg';
-import './App.css';
+import {CarForm} from "./components";
 
 function App() {
-  return (
-    <div className="App">
-
-    </div>
-  );
+    return (
+        <div>
+            <CarForm/>
+        </div>
+    );
 }
 
 export default App;
