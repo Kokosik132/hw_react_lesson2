@@ -23,7 +23,7 @@ const CarForm = ({setNewCar}) => {
             {formError.model && <span>{formError.price[0]}</span>}
             <div><label>Year: <input type="number" {...register('year', {valueAsNumber: true})}/></label></div>
             {formError.model && <span>{formError.year[0]}</span>}
-            <button>save</button>
+            <button>saves</button>
         </form>
     );
 };
