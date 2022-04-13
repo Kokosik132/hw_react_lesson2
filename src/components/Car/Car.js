@@ -1,7 +1,11 @@
 import React from 'react';
+import {carService} from "../../service";
 
 const Car = ({car}) => {
     const {id, model, price, year} = car;
+    const deleteCar = async () =>{
+       await carService.deleteById(id);
+    }
     return (
         <div>
             <div>id: {id}</div>
@@ -9,6 +13,7 @@ const Car = ({car}) => {
             <div>price: {price}</div>
             <div>year: {year}</div>
             <br/>
+            <button onClick={() => deleteCar()}>delete</button>
         </div>
     );
 };
