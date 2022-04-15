@@ -9,7 +9,7 @@ function App() {
                <Route index element={<Navigate to={'/home'}/>}/>
                <Route path={'home'} element={<HomePage/>}/>
                <Route path={'users'} element={<UsersPage/>}>
-                   <Route path={':id'} element={<SingleUserPage/>}>
+                   <Route path={':userId'} element={<SingleUserPage/>}>
                        <Route path={'posts'} element={<PostsPage/>}/>
                    </Route>
                </Route>

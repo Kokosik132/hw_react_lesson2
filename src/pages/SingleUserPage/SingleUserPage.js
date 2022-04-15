@@ -7,13 +7,13 @@ import {Outlet} from "react-router-dom";
 const SingleUserPage = () => {
     const [user, setUser] = useState([]);
     const {state} = useLocation();
-    const {id} = useParams();
+    const {userId} = useParams();
     useEffect(() => {
         if (!state) {
-            userService.getById(id).then(({data}) => setUser(data))
+            userService.getById(userId).then(({data}) => setUser(data))
         }
         setUser(state)
-    }, [id, state])
+    }, [userId, state])
 
     return (
         <div>
