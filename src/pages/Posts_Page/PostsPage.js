@@ -1,0 +1,26 @@
+import React, {useEffect, useState} from 'react';
+import {Outlet, useParams} from "react-router-dom";
+import {postService} from "../../service";
+import {Post} from "../../components";
+
+const PostsPage = () => {
+    const [posts, setPosts] = useState([]);
+    const {userId} = useParams();
+
+    useEffect(() => {
+        if (userId){
+            postService.getByUserId(userId).then(({data}) => setPosts(data))
+        } else {
+            postService.getAll().then(({data}) => setPosts(data))
+        }
+
+    }, [userId])
+    return (
+        <div style={{display:'flex'}}>
+            <div>{posts.map(post => <Post key={post.id} post={post}/>)}</div>
+            <div><Outlet/></div>
+        </div>
+    );
+};
+
+export {PostsPage};
