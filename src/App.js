@@ -1,12 +1,14 @@
-import logo from './logo.svg';
-import './App.css';
+import {Counter, Users} from "./components";
+import {Form} from "./components/Form";
 
 function App() {
-  return (
-    <div className="App">
-
-    </div>
-  );
+    return (
+        <div>
+            <Counter/>
+            <Form/>
+            <Users/>
+        </div>
+    );
 }
 
 export default App;
