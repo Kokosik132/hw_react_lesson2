@@ -1,9 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import {Cats, Dogs, FormCat, FormDog} from "./components";
 
 function App() {
   return (
-    <div className="App">
+    <div>
+        <div style={{display:"flex", justifyContent:"space-around"}}>
+            <div>
+                <div style={{display: "flex"}}>
+                    AddCat:<FormCat/>
+                </div>
+                <Cats/>
+            </div>
+            <div>
+                <div style={{display: "flex"}}>
+                    AddDog:<FormDog/>
+                </div>
+                <Dogs/>
+            </div>
+        </div>
 
     </div>
   );
