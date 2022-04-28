@@ -1,17 +1,28 @@
-import React, {useRef} from 'react';
+import React, {useState} from 'react';
 import {useDispatch} from "react-redux";
 import {catActions} from "../../redux/slice";
 
 const FormCat = () => {
-    const nameInputCat = useRef();
+    const [name, setName] = useState('');
+
     const dispatch = useDispatch();
-    
+
+    const save = () => {
+        dispatch(catActions.add({name}));
+        setName('');
+    }
+
+
     return (
         <div>
-            <input type="text" ref={nameInputCat}/>
-            <button onClick={()=> dispatch(catActions.add({cat:nameInputCat.current.value}))}>Save</button>
+            <label><input type="text"
+                          onChange={(e) => setName(e.target.value)}
+                          value={name}/></label>
+            <button onClick={save}>Save</button>
         </div>
     );
 };
 
 export {FormCat};
+
+
