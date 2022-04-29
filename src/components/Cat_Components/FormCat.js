@@ -1,28 +1,36 @@
-import React, {useState} from 'react';
-import {useDispatch} from "react-redux";
-import {catActions} from "../../redux/slice";
+import React, {useEffect, useState} from 'react';
+import {useDispatch, useSelector} from "react-redux";
+import {actionsCat} from "../../redux";
 
 const FormCat = () => {
+
     const [name, setName] = useState('');
 
+    const {CatForUpdate} = useSelector(({cats}) => cats);
     const dispatch = useDispatch();
 
-    const save = () => {
-        dispatch(catActions.add({name}));
-        setName('');
-    }
+    useEffect(() => {
+        if (CatForUpdate) {
+            setName(CatForUpdate.name)
+        }
+    }, [CatForUpdate])
 
+    const save = () => {
+        if (CatForUpdate) {
+        dispatch(actionsCat.updateCat({name, id: CatForUpdate.id}));
+        } else {
+            dispatch(actionsCat.addCat({name}))
+        }
+
+        setName('')
+    }
 
     return (
         <div>
-            <label><input type="text"
-                          onChange={(e) => setName(e.target.value)}
-                          value={name}/></label>
-            <button onClick={save}>Save</button>
+            <label>Cat:<input type="text" onChange={(event) => setName(event.target.value)} value={name}/></label>
+            <button onClick={save}>save</button>
         </div>
     );
 };
 
 export {FormCat};
-
-

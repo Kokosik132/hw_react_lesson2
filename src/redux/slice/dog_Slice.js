@@ -1,26 +1,16 @@
 import {createSlice} from "@reduxjs/toolkit";
 
-const initialState = {
-    dogs: []
-}
+const initialState = {dogs: []}
 
-
-const dogSlice = createSlice({
-    name: 'dogSlice',
+const dog_Slice = createSlice({
+    name: 'dog_Slice',
     initialState,
     reducers: {
-        add: (state, action) => {
-            const {dog} = action.payload;
-            const newDog = {id: new Date().getTime(), name:dog}
-            state.dogs.push(newDog)
-        }
-    }
-});
 
-const {reducer: dogReducer, actions: {add}} = dogSlice;
+    }
+})
+
+
+const {reducer: dogReducer, actions: { }} = dog_Slice;
 
 export default dogReducer
-
-export const dogActions = {
-    add
-}

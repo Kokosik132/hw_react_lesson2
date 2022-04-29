@@ -1,13 +1,14 @@
 import React from 'react';
 import {useDispatch} from "react-redux";
-import {catActions} from "../../redux/slice";
+import {actionsCat} from "../../redux";
 
 const Cat = ({cat}) => {
     const dispatch = useDispatch();
     return (
         <div>
-            {cat.name} -- {cat.id}
-            <button onClick={() => dispatch(catActions.deleteCat({ id: cat.id }))}>delete</button>
+            {cat.name}
+            <button onClick={() => dispatch(actionsCat.setCatForUpdate({ cat }))}>update</button>
+            <button onClick={() => dispatch(actionsCat.deleteCat({id: cat.id}))}>delete</button>
         </div>
     );
 };
