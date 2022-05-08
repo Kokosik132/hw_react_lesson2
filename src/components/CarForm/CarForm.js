@@ -1,20 +1,29 @@
 import React from 'react';
 import {useForm} from "react-hook-form";
+import {useDispatch, useSelector} from "react-redux";
+import {carActions} from "../../redux";
 
 const CarForm = () => {
 
+    const {formErrors} = useSelector(state => state.cars);
+
     const {reset, register, handleSubmit} = useForm();
+    const dispatch = useDispatch();
 
-    const submit = (car) => {
-
+    const submit = async (newCar) => {
+        await dispatch(carActions.createAsync({car:newCar}))       // і тут змінили назву Async
+        reset()
     }
 
     return (
         <div>
             <form onSubmit={handleSubmit(submit)}>
-                <div><label>Model:<input type="text"{...register('Model')}/></label></div>
-                <div><label>Price<input type="text"{...register('Price')}/></label></div>
-                <div><label>Year<input type="text"{...register('Year')}/></label></div>
+                <div><label>model:<input type="text"{...register('model')}/></label></div>
+                {formErrors.model && <span>{formErrors.model[0]}</span>}
+                <div><label>price<input type="text"{...register('price')}/></label></div>
+                {formErrors.price && <span>{formErrors.price[0]}</span>}
+                <div><label>year<input type="text"{...register('year')}/></label></div>
+                {formErrors.year && <span>{formErrors.year[0]}</span>}
                 <button>save</button>
             </form>
         </div>
