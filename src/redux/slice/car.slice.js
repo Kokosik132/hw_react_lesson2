@@ -15,6 +15,29 @@ const getAll = createAsyncThunk(
         return data
     }
 );
+const deleteById = createAsyncThunk(
+    'deleteById',
+    async ({id}, {dispatch, rejectWithValue}) => {
+        try {
+            await carService.deleteById(id)
+            dispatch(deleteCarById({id}))
+        } catch (e) {
+            return rejectWithValue({status: e.message})
+        }
+    }
+);
+
+const updateById = createAsyncThunk(
+    'updateById',
+    async ({id, car}, {dispatch, rejectWithValue}) => {
+        try {
+            await carService.updateById(id, car)
+            dispatch(updateCarById({id, car}))
+        } catch (e) {
+            return rejectWithValue({status: e.message})
+        }
+    }
+);
 
 const createAsync = createAsyncThunk(             // тут змінили назву на creatAsync Добавили Async
     'create',
@@ -22,7 +45,7 @@ const createAsync = createAsyncThunk(             // тут змінили на�
         try {
             const {data} = await carService.create(car);
             // return data                                            // робимо синхронно
-            dispatch(create({car:data}))
+            dispatch(create({car: data}))
         } catch (e) {
             return rejectWithValue({status: e.message, formErrors: e.response.data})
         }
@@ -32,10 +55,19 @@ const createAsync = createAsyncThunk(             // тут змінили на�
 const carSlice = createSlice({
     name: 'carSlice',
     initialState,
-    reducers: {                 // закоментили асинхронний create
-        create:(state, action) => {    // і тут
+    reducers: {                                                    // закоментили асинхронний create
+        create: (state, action) => {    // і тут
             state.cars.push(action.payload.car)                     // і тут
-        }                                                           // і тут
+        },
+        deleteCarById: (state, action) => {
+            const index = state.cars.findIndex(car => car.id === action.payload.id);
+            state.cars.splice(index, 1);
+        },
+        updateCarById: (state, action) => {
+            const index = state.cars.findIndex(car => car.id === action.payload.id);
+            state.cars[index] = {...state.cars[index], ...action.payload.car};
+        }
+
     },
     extraReducers: {
         [getAll.pending]: (state, action) => {
@@ -60,11 +92,13 @@ const carSlice = createSlice({
     }
 });
 
-const {reducer: carReducer, actions: {create}} = carSlice;
+const {reducer: carReducer, actions: {create, deleteCarById, updateCarById}} = carSlice;
 
 const carActions = {
     getAll,
-    createAsync                                                 // і тут змінили назву Async
+    createAsync,                                                 // і тут змінили назву Async
+    deleteById,
+    updateById,
 }
 
 export {
