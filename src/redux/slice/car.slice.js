@@ -5,7 +5,8 @@ import {carService} from "../../service";
 const initialState = {
     cars: [],
     status: null,
-    formErrors: {}
+    formErrors: {},
+    carForUpdate: null,
 }
 
 const getAll = createAsyncThunk(
@@ -66,6 +67,10 @@ const carSlice = createSlice({
         updateCarById: (state, action) => {
             const index = state.cars.findIndex(car => car.id === action.payload.id);
             state.cars[index] = {...state.cars[index], ...action.payload.car};
+            state.carForUpdate = false;
+        },
+        setCarForUpdate: (state, action) => {
+            state.carForUpdate = action.payload.car
         }
 
     },
@@ -92,13 +97,14 @@ const carSlice = createSlice({
     }
 });
 
-const {reducer: carReducer, actions: {create, deleteCarById, updateCarById}} = carSlice;
+const {reducer: carReducer, actions: {create, deleteCarById, updateCarById, setCarForUpdate}} = carSlice;
 
 const carActions = {
     getAll,
     createAsync,                                                 // і тут змінили назву Async
     deleteById,
-    updateById,
+    setCarForUpdate,
+    updateById
 }
 
 export {
