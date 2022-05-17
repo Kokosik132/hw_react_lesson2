@@ -1,6 +1,6 @@
 import React from 'react';
 
-const NofFoundPage = () => {
+const NotFoundPage = () => {
     return (
         <div>
 
@@ -8,4 +8,4 @@ const NofFoundPage = () => {
     );
 };
 
-export  {NofFoundPage};
+export  {NotFoundPage};

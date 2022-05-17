@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import {useForm} from "react-hook-form";
 import {useDispatch, useSelector} from "react-redux";
 import {carActions} from "../../redux";
+import {useNavigate} from "react-router-dom";
 
 const CarForm = () => {
 
@@ -9,6 +10,8 @@ const CarForm = () => {
 
     const {reset, register, handleSubmit, setValue} = useForm();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
 
     useEffect(() => {
         if (carForUpdate) {
@@ -27,6 +30,7 @@ const CarForm = () => {
             await dispatch(carActions.createAsync({car: newCar}))       // і тут змінили назву Async
 
         }
+        navigate('/cars')
         reset()
     }
 
