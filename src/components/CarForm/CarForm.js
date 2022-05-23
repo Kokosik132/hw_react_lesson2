@@ -11,7 +11,7 @@ const CarForm = () => {
     const {reset, register, handleSubmit, setValue} = useForm();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-\\g
+
 
     useEffect(() => {
         if (carForUpdate) {
