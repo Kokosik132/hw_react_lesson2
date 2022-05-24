@@ -1,12 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import {Routes, Route, Navigate} from "react-router-dom"
+import {MainLayout} from "./layouts";
+import {CharactersPage, EpisodePages} from "./pages";
 
-function App() {
-  return (
-    <div className="App">
+const App = () => {
+    return (
+        <Routes>
+            <Route path={'/'} element={<MainLayout/>}>
+                <Route index element={<Navigate to={'episodes'}/>}/>
+                <Route path={'episodes'} element={<EpisodePages/>}/>
+                <Route path={'characters'} element={<CharactersPage/>}/>
+            </Route>
+        </Routes>
+    );
+};
 
-    </div>
-  );
-}
-
-export default App;
+export {App};
